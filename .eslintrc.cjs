@@ -6,8 +6,15 @@ module.exports = {
   extends: ["plugin:react/recommended", "xo", "prettier"],
   overrides: [
     {
+      rules: {},
       extends: ["xo-typescript", "prettier"],
       files: ["*.ts", "*.tsx"],
+    },
+    {
+      files: ["src/vite-env.d.ts"],
+      rules: {
+        "@typescript-eslint/triple-slash-reference": "off",
+      },
     },
   ],
   parserOptions: {
@@ -16,4 +23,9 @@ module.exports = {
   },
   plugins: ["react"],
   rules: {},
+  settings: {
+    react: {
+      version: "detect",
+    },
+  },
 };

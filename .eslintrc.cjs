@@ -16,6 +16,10 @@ module.exports = {
         "@typescript-eslint/triple-slash-reference": "off",
       },
     },
+    {
+      files: ["src/**/theme/**/*.ts"],
+      rules: { "@typescript-eslint/naming-convention": "off" },
+    },
   ],
   parserOptions: {
     ecmaVersion: "latest",

@@ -10,5 +10,6 @@ module.exports = {
     "src/**/*.tsx",
     "!src/main.tsx",
     "!src/vite-env.d.ts",
+    "!src/theme/**/*.*",
   ],
 };

@@ -6,7 +6,10 @@ module.exports = {
   extends: ["plugin:react/recommended", "xo", "prettier"],
   overrides: [
     {
-      rules: {},
+      rules: {
+        "@typescript-eslint/consistent-type-definitions": "off",
+        "@typescript-eslint/consistent-type-imports": "off",
+      },
       extends: ["xo-typescript", "prettier"],
       files: ["*.ts", "*.tsx"],
     },
@@ -26,7 +29,9 @@ module.exports = {
     sourceType: "module",
   },
   plugins: ["react"],
-  rules: {},
+  rules: {
+    "react/react-in-jsx-scope": "off",
+  },
   settings: {
     react: {
       version: "detect",

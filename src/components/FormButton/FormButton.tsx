@@ -1,18 +1,17 @@
-import React from "react";
 import { Button } from "@chakra-ui/react";
 
 type FormButtonProps = {
   text: string;
-  isdDisabled: boolean;
+  isDisabled: boolean;
 };
 
-const FormButton = ({ text, isdDisabled }: FormButtonProps): JSX.Element => (
+const FormButton = ({ text, isDisabled }: FormButtonProps): JSX.Element => (
   <Button
     type="submit"
     size="lg"
     w="full"
     variant="formButton"
-    isDisabled={isdDisabled}
+    isDisabled={isDisabled}
   >
     {text}
   </Button>

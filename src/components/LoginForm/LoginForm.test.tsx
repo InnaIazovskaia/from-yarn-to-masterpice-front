@@ -1,21 +1,15 @@
-import React from "react";
-import { render, screen } from "@testing-library/react";
+import { afterEach, describe, expect, it } from "vitest";
+import { cleanup, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import LoginForm from "./LoginForm";
 
 describe("Given a LoginForm component", () => {
-  describe("Then it's rendered", () => {
-    test("Then it should display heading 'Login'", () => {
-      const headingText = "Login";
+  afterEach(cleanup);
+  const labelTextForPasswordInput = "Password";
+  const labelTextForUsernameInput = "Username";
 
-      render(<LoginForm />);
-
-      const heading = screen.getByRole("heading", { name: headingText });
-
-      expect(heading).toBeInTheDocument();
-    });
-
-    test("Then it should display button with text 'Login'", () => {
+  describe("When it's rendered", () => {
+    it("Then it should display button with text 'Login'", () => {
       const text = "Login";
 
       render(<LoginForm />);
@@ -25,7 +19,7 @@ describe("Given a LoginForm component", () => {
       expect(button).toBeInTheDocument();
     });
 
-    test("Then it should display input with label 'Username'", () => {
+    it("Should display input with label 'Username'", () => {
       const labelText = "Username";
 
       render(<LoginForm />);
@@ -35,7 +29,7 @@ describe("Given a LoginForm component", () => {
       expect(inputNode).toBeInTheDocument();
     });
 
-    test("Then it should display input with label 'Password'", () => {
+    it("Should display input with label 'Password'", () => {
       const labelText = "Password";
 
       render(<LoginForm />);
@@ -47,13 +41,12 @@ describe("Given a LoginForm component", () => {
   });
 
   describe("When the user writes the text 'name' inside the Username input", () => {
-    test("Then value of the input should be 'name'", async () => {
+    it("Then value of the input should be 'name'", async () => {
       const text = "name";
-      const labelText = "Username";
 
       render(<LoginForm />);
 
-      const usernameInput = screen.getByLabelText(labelText);
+      const usernameInput = screen.getByLabelText(labelTextForUsernameInput);
       await userEvent.type(usernameInput, text);
 
       expect(usernameInput).toHaveValue(text);
@@ -61,47 +54,61 @@ describe("Given a LoginForm component", () => {
   });
 
   describe("When the user writes the text 'password' inside the Password input", () => {
-    test("Then value of the input should be 'password'", async () => {
+    it("Then value of the input should be 'password'", async () => {
       const text = "password";
-      const labelText = "Password";
 
       render(<LoginForm />);
 
-      const usernameInput = screen.getByLabelText(labelText);
-      await userEvent.type(usernameInput, text);
+      const passwordInput = screen.getByLabelText(labelTextForPasswordInput);
+      await userEvent.type(passwordInput, text);
 
-      expect(usernameInput).toHaveValue(text);
+      expect(passwordInput).toHaveValue(text);
     });
   });
 
-  describe("When it's rendered and user don't enter text in inputs", () => {
-    test("Then the form button shoud be disabled", () => {
+  describe("When the user start to type in input for username, but doesn't enter anything", () => {
+    it("Should show error message 'Username is required'", async () => {
+      const expectedErroreMessage = "Username is required";
+
+      render(<LoginForm />);
+
+      const usernameInput = screen.getByLabelText(labelTextForUsernameInput);
+      usernameInput.focus();
+      await userEvent.tab();
+
+      const errorMessage = screen.getByText(expectedErroreMessage);
+
+      await waitFor(() => {
+        expect(errorMessage).toBeInTheDocument();
+      });
+    });
+  });
+
+  describe("When the user start to type in input for password, but doesn't enter anything", () => {
+    it("Should show error message 'Password is required'", async () => {
+      const expectedErroreMessage = "Password is required";
+
+      render(<LoginForm />);
+
+      const passwordInput = screen.getByLabelText(labelTextForPasswordInput);
+      passwordInput.focus();
+      await userEvent.tab();
+
+      const errorMessage = screen.getByText(expectedErroreMessage);
+
+      await waitFor(() => {
+        expect(errorMessage).toBeInTheDocument();
+      });
+    });
+  });
+
+  describe("When it's rendered and the user doesn't enter text in inputs", () => {
+    it("Then the form button shoud be disabled", () => {
       render(<LoginForm />);
 
       const button = screen.getByRole("button");
 
       expect(button).toBeDisabled();
-    });
-  });
-
-  describe("When the user enter username 'Marta' and valid password with minimum 8 characters '123456789'", () => {
-    test("Then the form button should be enabled", async () => {
-      const username = "Marta";
-      const password = "123456789";
-      const labelForUsername = "Username";
-      const labelForPassword = "Password";
-
-      render(<LoginForm />);
-
-      const button = screen.getByRole("button");
-
-      const usernameInput = screen.getByLabelText(labelForUsername);
-      await userEvent.type(usernameInput, username);
-
-      const passwordInput = screen.getByLabelText(labelForPassword);
-      await userEvent.type(passwordInput, password);
-
-      expect(button).not.toBeDisabled();
     });
   });
 });

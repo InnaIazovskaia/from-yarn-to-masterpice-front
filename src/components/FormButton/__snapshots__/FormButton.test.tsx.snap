@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Given a FormButton component When it's rendered' Then it should always match this snapshot 1`] = `
+exports[`Given a FormButton component > When it's rendered > Should always match with snapshot 1`] = `
 <div>
   <button
     class="chakra-button css-l01cow"

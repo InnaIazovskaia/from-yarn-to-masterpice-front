@@ -1,6 +1,8 @@
 import { extendTheme, theme as base } from "@chakra-ui/react";
 import { formButton, formInput } from "./components/formComponents";
+
 import { colors } from "./globalStyles";
+import { navLink, iconLink } from "./components/navComponents";
 
 const theme = extendTheme({
   styles: {
@@ -24,6 +26,16 @@ const theme = extendTheme({
     Input: {
       variants: {
         formInput,
+      },
+    },
+    Link: {
+      variants: {
+        navLink,
+      },
+    },
+    InputButton: {
+      variants: {
+        iconLink,
       },
     },
   },

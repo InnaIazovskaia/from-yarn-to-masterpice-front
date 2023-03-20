@@ -1,10 +1,9 @@
-import { afterEach, describe, expect, it } from "vitest";
-import { cleanup, render, screen, waitFor } from "@testing-library/react";
+import { describe, expect, it } from "vitest";
+import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import LoginForm from "./LoginForm";
 
 describe("Given a LoginForm component", () => {
-  afterEach(cleanup);
   const labelTextForPasswordInput = "Password";
   const labelTextForUsernameInput = "Username";
 

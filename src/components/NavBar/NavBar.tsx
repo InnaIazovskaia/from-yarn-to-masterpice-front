@@ -89,24 +89,24 @@ const NavBar = (): JSX.Element => {
               icon={<CiShoppingCart />}
             />
           </Stack>
-          {isOpen ? (
-            <Box pb={4} display={{ md: "none" }}>
-              <Stack spacing={7}>
-                {links.map((link) => (
-                  <Link
-                    aria-label="mobile links"
-                    as={NavLink}
-                    to={`/${link.toLowerCase()}`}
-                    variant="navLink"
-                    key={link}
-                  >
-                    {link}
-                  </Link>
-                ))}
-              </Stack>
-            </Box>
-          ) : null}
         </Flex>
+        {isOpen ? (
+          <Box pb={4} display={{ md: "none" }}>
+            <Stack spacing={7}>
+              {links.map((link) => (
+                <Link
+                  aria-label="mobile links"
+                  as={NavLink}
+                  to={`/${link.toLowerCase()}`}
+                  variant="navLink"
+                  key={link}
+                >
+                  {link}
+                </Link>
+              ))}
+            </Stack>
+          </Box>
+        ) : null}
       </IconContext.Provider>
     </>
   );

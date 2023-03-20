@@ -9,3 +9,9 @@ export const iconLink = {
   color: "brand.900",
   fontWeight: "normal",
 };
+
+export const link = {
+  color: "brand.strong",
+  fontWeight: "500",
+  fontSize: "1.1rem",
+};

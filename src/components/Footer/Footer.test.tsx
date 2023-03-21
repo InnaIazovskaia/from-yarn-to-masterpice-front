@@ -14,9 +14,9 @@ describe("Given a Footer component", () => {
       expect(text).toBeInTheDocument();
     });
 
-    it("Should show text 'All questions about the master classes and patterns you can sent to email'", () => {
+    it("Should show text 'All questions about the master classes and patterns you can send to email'", () => {
       const expectedText =
-        "All questions about the master classes and patterns you can sent to email";
+        "All questions about the master classes and patterns you can send to email";
 
       render(<Footer />);
 

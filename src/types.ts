@@ -14,5 +14,5 @@ export interface UserData {
 }
 
 export interface UserState extends UserData {
-  isLoged: boolean;
+  isLogged: boolean;
 }

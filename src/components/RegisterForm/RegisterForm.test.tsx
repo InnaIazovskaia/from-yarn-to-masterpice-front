@@ -51,7 +51,7 @@ describe("Given a RegisterForm component", () => {
       render(<RegisterForm />);
 
       const usernameInput = screen.getByLabelText(labelTextForUsernameInput);
-      await userEvent.type(usernameInput, text);
+      await waitFor(async () => userEvent.type(usernameInput, text));
 
       expect(usernameInput).toHaveValue(text);
     });
@@ -64,7 +64,7 @@ describe("Given a RegisterForm component", () => {
       render(<RegisterForm />);
 
       const passwordInput = screen.getByLabelText(labelTextForPasswordInput);
-      await userEvent.type(passwordInput, text);
+      await waitFor(async () => userEvent.type(passwordInput, text));
 
       expect(passwordInput).toHaveValue(text);
     });
@@ -77,7 +77,7 @@ describe("Given a RegisterForm component", () => {
       render(<RegisterForm />);
 
       const emailInput = screen.getByLabelText(labelTextForEmailInput);
-      await userEvent.type(emailInput, text);
+      await waitFor(async () => userEvent.type(emailInput, text));
 
       expect(emailInput).toHaveValue(text);
     });
@@ -90,14 +90,15 @@ describe("Given a RegisterForm component", () => {
       render(<RegisterForm />);
 
       const usernameInput = screen.getByLabelText(labelTextForUsernameInput);
-      usernameInput.focus();
-      await userEvent.tab();
+
+      await waitFor(async () => {
+        usernameInput.focus();
+        await userEvent.tab();
+      });
 
       const errorMessage = screen.getByText(expectedErroreMessage);
 
-      await waitFor(() => {
-        expect(errorMessage).toBeInTheDocument();
-      });
+      expect(errorMessage).toBeInTheDocument();
     });
   });
 
@@ -108,14 +109,15 @@ describe("Given a RegisterForm component", () => {
       render(<RegisterForm />);
 
       const passwordInput = screen.getByLabelText(labelTextForPasswordInput);
-      passwordInput.focus();
-      await userEvent.tab();
+
+      await waitFor(async () => {
+        passwordInput.focus();
+        await userEvent.tab();
+      });
 
       const errorMessage = screen.getByText(expectedErroreMessage);
 
-      await waitFor(() => {
-        expect(errorMessage).toBeInTheDocument();
-      });
+      expect(errorMessage).toBeInTheDocument();
     });
   });
 
@@ -126,14 +128,15 @@ describe("Given a RegisterForm component", () => {
       render(<RegisterForm />);
 
       const emailInput = screen.getByLabelText(labelTextForEmailInput);
-      emailInput.focus();
-      await userEvent.tab();
+
+      await waitFor(async () => {
+        emailInput.focus();
+        await userEvent.tab();
+      });
 
       const errorMessage = screen.getByText(expectedErroreMessage);
 
-      await waitFor(() => {
-        expect(errorMessage).toBeInTheDocument();
-      });
+      expect(errorMessage).toBeInTheDocument();
     });
   });
 

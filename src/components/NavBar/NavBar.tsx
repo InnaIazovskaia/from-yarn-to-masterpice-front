@@ -34,6 +34,7 @@ const NavBar = (): JSX.Element => {
           top={0}
           px={8}
           boxShadow="0px 7px 10px -9px #2e3151"
+          bg="white"
         >
           <IconButton
             aria-label="Open Menu"

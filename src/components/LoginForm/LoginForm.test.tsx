@@ -46,7 +46,8 @@ describe("Given a LoginForm component", () => {
       render(<LoginForm />);
 
       const usernameInput = screen.getByLabelText(labelTextForUsernameInput);
-      await userEvent.type(usernameInput, text);
+
+      await waitFor(async () => userEvent.type(usernameInput, text));
 
       expect(usernameInput).toHaveValue(text);
     });
@@ -59,7 +60,7 @@ describe("Given a LoginForm component", () => {
       render(<LoginForm />);
 
       const passwordInput = screen.getByLabelText(labelTextForPasswordInput);
-      await userEvent.type(passwordInput, text);
+      await waitFor(async () => userEvent.type(passwordInput, text));
 
       expect(passwordInput).toHaveValue(text);
     });
@@ -72,8 +73,10 @@ describe("Given a LoginForm component", () => {
       render(<LoginForm />);
 
       const usernameInput = screen.getByLabelText(labelTextForUsernameInput);
-      usernameInput.focus();
-      await userEvent.tab();
+      await waitFor(async () => {
+        usernameInput.focus();
+        await userEvent.tab();
+      });
 
       const errorMessage = screen.getByText(expectedErroreMessage);
 
@@ -90,8 +93,10 @@ describe("Given a LoginForm component", () => {
       render(<LoginForm />);
 
       const passwordInput = screen.getByLabelText(labelTextForPasswordInput);
-      passwordInput.focus();
-      await userEvent.tab();
+      await waitFor(async () => {
+        passwordInput.focus();
+        await userEvent.tab();
+      });
 
       const errorMessage = screen.getByText(expectedErroreMessage);
 

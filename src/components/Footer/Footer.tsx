@@ -5,7 +5,7 @@ const Footer = (): JSX.Element => (
   <VStack as="footer" justifyContent="center" mt={10}>
     <VStack bg="brand.100" h={130} w="100%" justifyContent="center">
       <Text align="center" fontSize="0.9rem" p={1}>
-        All questions about the master classes and patterns you can sent to
+        All questions about the master classes and patterns you can send to
         email
       </Text>
       <Link href="mailto:inna.0961@mail.ru">

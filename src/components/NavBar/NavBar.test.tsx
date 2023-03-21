@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { getAllByRole, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
 import userEvent from "@testing-library/user-event";
 import NavBar from "./NavBar";

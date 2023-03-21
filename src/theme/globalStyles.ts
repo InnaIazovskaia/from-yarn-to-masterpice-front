@@ -10,5 +10,6 @@ export const colors = {
     700: "#2e3151",
     800: "#1b1d32",
     900: "#080a15",
+    strong: "#f91f6d",
   },
 };

@@ -12,6 +12,6 @@ export const iconLink = {
 
 export const link = {
   color: "brand.strong",
-  fontWeight: "500",
+  fontWeight: "600",
   fontSize: "1.1rem",
 };

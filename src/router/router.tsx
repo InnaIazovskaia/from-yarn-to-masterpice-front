@@ -3,6 +3,7 @@ import App from "../App";
 import AccountRedirects from "../components/AccountRedirects/AccountRedirects";
 
 import LoginPage from "../pages/LoginPage/LoginPage";
+import RegisterPage from "../pages/RegisterPage/RegisterPage";
 
 const routes: RouteObject[] = [
   {
@@ -34,7 +35,7 @@ const routes: RouteObject[] = [
       },
       {
         path: "/account/register",
-        element: <></>,
+        element: <RegisterPage />,
       },
       {
         path: "/cart",

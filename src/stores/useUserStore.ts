@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
-import { UserData, UserState } from "../types";
+import { UserData, UserState } from "../types/userTypes";
 
 interface UserStore {
   userState: UserState;

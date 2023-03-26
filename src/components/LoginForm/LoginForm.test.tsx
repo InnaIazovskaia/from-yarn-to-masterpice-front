@@ -1,17 +1,23 @@
-import { describe, expect, it } from "vitest";
 import { render, screen, waitFor } from "@testing-library/react";
+import { describe, expect, it } from "vitest";
 import userEvent from "@testing-library/user-event";
 import LoginForm from "./LoginForm";
+import { BrowserRouter } from "react-router-dom";
 
 describe("Given a LoginForm component", () => {
   const labelTextForPasswordInput = "Password";
   const labelTextForUsernameInput = "Username";
+  const message = "";
 
   describe("When it's rendered", () => {
     it("Then it should display button with text 'Login'", () => {
       const text = "Login";
 
-      render(<LoginForm />);
+      render(
+        <BrowserRouter>
+          <LoginForm message={message} />
+        </BrowserRouter>
+      );
 
       const button = screen.getByRole("button", { name: text });
 
@@ -21,7 +27,11 @@ describe("Given a LoginForm component", () => {
     it("Should display input with label 'Username'", () => {
       const labelText = "Username";
 
-      render(<LoginForm />);
+      render(
+        <BrowserRouter>
+          <LoginForm message={message} />
+        </BrowserRouter>
+      );
 
       const inputNode = screen.getByLabelText(labelText);
 
@@ -31,7 +41,11 @@ describe("Given a LoginForm component", () => {
     it("Should display input with label 'Password'", () => {
       const labelText = "Password";
 
-      render(<LoginForm />);
+      render(
+        <BrowserRouter>
+          <LoginForm message={message} />
+        </BrowserRouter>
+      );
 
       const inputNode = screen.getByLabelText(labelText);
 
@@ -43,7 +57,11 @@ describe("Given a LoginForm component", () => {
     it("Then value of the input should be 'name'", async () => {
       const text = "name";
 
-      render(<LoginForm />);
+      render(
+        <BrowserRouter>
+          <LoginForm message={message} />
+        </BrowserRouter>
+      );
 
       const usernameInput = screen.getByLabelText(labelTextForUsernameInput);
 
@@ -57,7 +75,11 @@ describe("Given a LoginForm component", () => {
     it("Then value of the input should be 'password'", async () => {
       const text = "password";
 
-      render(<LoginForm />);
+      render(
+        <BrowserRouter>
+          <LoginForm message={message} />
+        </BrowserRouter>
+      );
 
       const passwordInput = screen.getByLabelText(labelTextForPasswordInput);
       await waitFor(async () => userEvent.type(passwordInput, text));
@@ -70,7 +92,11 @@ describe("Given a LoginForm component", () => {
     it("Should show error message 'Username is required'", async () => {
       const expectedErroreMessage = "Username is required";
 
-      render(<LoginForm />);
+      render(
+        <BrowserRouter>
+          <LoginForm message={message} />
+        </BrowserRouter>
+      );
 
       const usernameInput = screen.getByLabelText(labelTextForUsernameInput);
       await waitFor(async () => {
@@ -90,7 +116,11 @@ describe("Given a LoginForm component", () => {
     it("Should show error message 'Password is required'", async () => {
       const expectedErroreMessage = "Password is required";
 
-      render(<LoginForm />);
+      render(
+        <BrowserRouter>
+          <LoginForm message={message} />
+        </BrowserRouter>
+      );
 
       const passwordInput = screen.getByLabelText(labelTextForPasswordInput);
       await waitFor(async () => {
@@ -108,7 +138,11 @@ describe("Given a LoginForm component", () => {
 
   describe("When it's rendered and the user doesn't enter text in inputs", () => {
     it("Then the form button shoud be disabled", () => {
-      render(<LoginForm />);
+      render(
+        <BrowserRouter>
+          <LoginForm message={message} />
+        </BrowserRouter>
+      );
 
       const button = screen.getByRole("button");
 

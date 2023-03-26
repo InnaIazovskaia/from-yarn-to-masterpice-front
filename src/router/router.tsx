@@ -1,7 +1,7 @@
 import { createBrowserRouter, RouteObject } from "react-router-dom";
 import App from "../App";
 import AccountRedirects from "../components/AccountRedirects/AccountRedirects";
-
+import paths from "./paths";
 import LoginPage from "../pages/LoginPage/LoginPage";
 import RegisterPage from "../pages/RegisterPage/RegisterPage";
 
@@ -12,33 +12,33 @@ const routes: RouteObject[] = [
 
     children: [
       {
-        path: "/home",
+        path: paths.home,
         element: <></>,
       },
       {
-        path: "/patterns",
+        path: paths.patterns,
         element: <></>,
       },
       {
-        path: "/about",
+        path: paths.about,
       },
       {
-        path: "/contact",
+        path: paths.contact,
       },
       {
-        path: "/account",
+        path: paths.account,
         element: <AccountRedirects />,
       },
       {
-        path: "/account/login",
+        path: paths.login,
         element: <LoginPage />,
       },
       {
-        path: "/account/register",
+        path: paths.register,
         element: <RegisterPage />,
       },
       {
-        path: "/cart",
+        path: paths.cart,
         element: <></>,
       },
     ],

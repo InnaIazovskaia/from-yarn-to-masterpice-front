@@ -5,6 +5,7 @@ import useUiStore from "../../stores/useUiStore";
 
 const LoginPage = (): JSX.Element => {
   const feedback = useUiStore((state) => state.feedbackMessage);
+  const { hideFeedbakcMessageAction } = useUiStore();
 
   return (
     <>
@@ -13,7 +14,12 @@ const LoginPage = (): JSX.Element => {
           LOGIN
         </Heading>
         <LoginForm message={feedback} />
-        <Link as={NavLink} to="/account/register" variant="link">
+        <Link
+          as={NavLink}
+          to="/account/register"
+          variant="link"
+          onClick={hideFeedbakcMessageAction}
+        >
           Create an account
         </Link>
       </VStack>

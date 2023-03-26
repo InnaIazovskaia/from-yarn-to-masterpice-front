@@ -1,13 +1,19 @@
 import jwtDecode from "jwt-decode";
 import { useNavigate } from "react-router-dom";
-import { UserCredentials, UserData } from "../../types/userTypes";
+import {
+  UserCredentials,
+  UserData,
+  UserRegisterCredentials,
+} from "../../types/userTypes";
 import useUserStore from "../../stores/useUserStore";
 import { CustomTokenPayload, LoginResponse, ErrorResponse } from "./types";
 import useUiStore from "../../stores/useUiStore";
 import userEndpoints from "./userEndpoints";
+import paths from "../../router/paths";
 
 interface UseUserStructure {
   userLogin: (userCredentials: UserCredentials) => Promise<void>;
+  userRegister: (registerUserData: UserRegisterCredentials) => Promise<void>;
 }
 
 const apiUrl: string =
@@ -52,7 +58,37 @@ const useUser = (): UseUserStructure => {
         userLoginAction(loggedUser);
 
         localStorage.setItem("token", token);
-        navigate("/home");
+        navigate(paths.home);
+        return;
+      }
+
+      const { message } = (await response.json()) as ErrorResponse;
+      errorMessage = message;
+      throw new Error();
+    } catch (error) {
+      showFeedbakcMessageAction(errorMessage);
+      unsetIsLoadingAction();
+    }
+  };
+
+  const userRegister = async (registerUserData: UserRegisterCredentials) => {
+    const response = await fetch(
+      `${apiUrl}${userEndpoints.userEndpoint}${userEndpoints.registerEndpoint}`,
+      {
+        method: "POST",
+        body: JSON.stringify(registerUserData),
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+
+    setIsLoadingAction();
+    let errorMessage = "";
+
+    try {
+      if (response.ok) {
+        unsetIsLoadingAction();
+        hideFeedbakcMessageAction();
+        navigate(paths.home);
 
         return;
       }
@@ -66,7 +102,7 @@ const useUser = (): UseUserStructure => {
     }
   };
 
-  return { userLogin };
+  return { userLogin, userRegister };
 };
 
 export default useUser;

@@ -3,33 +3,43 @@ import {
   FormControl,
   FormErrorMessage,
   FormLabel,
-  Heading,
   Input,
   VStack,
 } from "@chakra-ui/react";
 import { Formik, Field, Form } from "formik";
-import { UserRegisterCredentials } from "../../types";
+import useUser from "../../hooks/useUser/useUser";
+import { UserRegisterCredentials } from "../../types/userTypes";
 import {
   validateEmail,
   validatePassword,
   validateUsername,
 } from "../../utils/formsValidations";
 import FormButton from "../FormButton/FormButton";
+import Info from "../Info/Info";
 
-const RegisterForm = (): JSX.Element => {
+interface RegisterFormProps {
+  message: string;
+}
+
+const RegisterForm = ({ message }: RegisterFormProps): JSX.Element => {
   const initialFormData: UserRegisterCredentials = {
     username: "",
     password: "",
     email: "",
   };
 
+  const { userRegister } = useUser();
+
   return (
     <Box p={[5, 10, 15]} rounded="md" w={["full", "md", "lg"]} mx="auto">
+      {message ? <Info message={message} /> : <></>}
+
       <Formik
         initialValues={{
           ...initialFormData,
         }}
-        onSubmit={(values, { resetForm }) => {
+        onSubmit={async (values, { resetForm }) => {
+          await userRegister(values);
           resetForm();
         }}
       >

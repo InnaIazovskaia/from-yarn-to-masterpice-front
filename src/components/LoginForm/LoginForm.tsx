@@ -4,7 +4,6 @@ import {
   FormErrorMessage,
   FormLabel,
   Input,
-  Text,
   VStack,
 } from "@chakra-ui/react";
 import { Formik, Field, Form } from "formik";

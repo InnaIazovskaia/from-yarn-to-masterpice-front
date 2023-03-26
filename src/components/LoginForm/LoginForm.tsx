@@ -4,29 +4,40 @@ import {
   FormErrorMessage,
   FormLabel,
   Input,
+  Text,
   VStack,
 } from "@chakra-ui/react";
 import { Formik, Field, Form } from "formik";
-import { UserCredentials } from "../../types";
+import useUser from "../../hooks/useUser/useUser";
+import { UserCredentials } from "../../types/userTypes";
 import {
   validatePassword,
   validateUsername,
 } from "../../utils/formsValidations";
 import FormButton from "../FormButton/FormButton";
+import Info from "../Info/Info";
 
-const LoginForm = (): JSX.Element => {
+interface LoginFormProps {
+  message: string;
+}
+
+const LoginForm = ({ message }: LoginFormProps): JSX.Element => {
   const initialFormData: UserCredentials = {
     username: "",
     password: "",
   };
+  const { userLogin } = useUser();
 
   return (
     <Box p={[5, 10, 15]} rounded="md" w={["full", "md", "lg"]} mx="auto">
+      {message ? <Info message={message} /> : <></>}
+
       <Formik
         initialValues={{
           ...initialFormData,
         }}
         onSubmit={async (values, { resetForm }) => {
+          await userLogin(values);
           resetForm();
         }}
       >
@@ -61,6 +72,7 @@ const LoginForm = (): JSX.Element => {
                 />
                 <FormErrorMessage>{errors.password}</FormErrorMessage>
               </FormControl>
+
               <FormButton
                 text="Login"
                 isDisabled={
